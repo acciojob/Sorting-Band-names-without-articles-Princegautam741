@@ -12,17 +12,20 @@ let bandNames = [
 function sortBandNames(names) {
   const articlesRegex = /^(a |an |the )/i;
 
-  return names.sort((a, b) => {
+  // Sort the names without articles
+  const sortedNames = names.sort((a, b) => {
     const trimmedA = a.replace(articlesRegex, '').toLowerCase();
     const trimmedB = b.replace(articlesRegex, '').toLowerCase();
     return trimmedA.localeCompare(trimmedB);
   });
+
+  return sortedNames;
 }
 
 // Call the sortBandNames function to sort the band names
 const sortedBandNames = sortBandNames(bandNames);
 
-// Get the ul element with id 'bands'
+// Get the ul element
 const bandsList = document.querySelector('#bands');
 
 // Clear any existing content inside the ul
