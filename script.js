@@ -23,7 +23,10 @@ function sortBandNames(names) {
 const sortedBandNames = sortBandNames(bandNames);
 
 // Get the ul element with id 'bands'
-const bandsList = document.querySelector('#bands ul');
+const bandsList = document.querySelector('#bands');
+
+// Clear any existing content inside the ul
+bandsList.innerHTML = '';
 
 // Iterate through the sorted band names and add them to the ul as list items
 sortedBandNames.forEach(band => {
