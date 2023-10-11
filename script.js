@@ -38,5 +38,5 @@ sortedBandNames.forEach(band => {
   bandsList.appendChild(listItem);
 });
 
-// Export sorted band names for Cypress testing
-export { sortedBandNames };
+// Make sorted band names available to Cypress
+window.sortedBandNames = sortedBandNames;
