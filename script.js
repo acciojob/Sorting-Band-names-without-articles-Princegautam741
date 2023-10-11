@@ -25,7 +25,7 @@ function sortBandNames(names) {
 // Call the sortBandNames function to sort the band names
 const sortedBandNames = sortBandNames(bandNames);
 
-// Get the ul element
+// Get the ul element with id 'bands'
 const bandsList = document.querySelector('#bands');
 
 // Clear any existing content inside the ul
@@ -37,3 +37,6 @@ sortedBandNames.forEach(band => {
   listItem.textContent = band;
   bandsList.appendChild(listItem);
 });
+
+// Export sorted band names for Cypress testing
+export { sortedBandNames };
