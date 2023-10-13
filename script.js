@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Function to sort band names without articles
   function sortBandNames(names) {
-    const articlesRegex = /\b(?:a|an|the)\b\s*/gi;
+    const articlesRegex = /^(a |an |the )/i;
 
     // Sort the names without articles
     const sortedNames = names.sort((a, b) => {
