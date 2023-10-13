@@ -11,12 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Function to sort band names without articles
   function sortBandNames(names) {
-    const articlesRegex = /\b(?:a|an|the)\b\s*/i;
+    const articlesRegex = /\b(?:a|an|the)\b\s*/gi;
 
     // Sort the names without articles
     const sortedNames = names.sort((a, b) => {
-      const trimmedA = a.replace(articlesRegex, '').toLowerCase();
-      const trimmedB = b.replace(articlesRegex, '').toLowerCase();
+      const trimmedA = a.replace(articlesRegex, '').trim().toLowerCase();
+      const trimmedB = b.replace(articlesRegex, '').trim().toLowerCase();
       return trimmedA.localeCompare(trimmedB);
     });
 
