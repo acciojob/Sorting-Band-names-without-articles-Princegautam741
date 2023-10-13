@@ -37,6 +37,3 @@ sortedBandNames.forEach(band => {
   listItem.textContent = band;
   bandsList.appendChild(listItem);
 });
-
-// Make sorted band names available to Cypress
-window.sortedBandNames = sortedBandNames;
