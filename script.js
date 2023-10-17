@@ -35,8 +35,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Iterate through the sorted band names and add them to the ul as list items
     sortedBandNames.forEach(band => {
+      // Split the band name into words
+      const words = band.split(' ');
+
+      // Filter out articles ('a', 'an', 'the')
+      const filteredWords = words.filter(word => !['a', 'an', 'the'].includes(word.toLowerCase()));
+
+      // Join the filtered words back into a band name
+      const bandName = filteredWords.join(' ');
+
       const listItem = document.createElement('li');
-      listItem.textContent = band;
+      listItem.textContent = bandName;
       bandsList.appendChild(listItem);
     });
   } else {
