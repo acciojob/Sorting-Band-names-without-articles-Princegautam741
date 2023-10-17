@@ -1,52 +1,48 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // Array of band names
-  let bandNames = [
-    'The Rolling Stones',
-    'Aerosmith',
-    'The Beatles',
-    'Guns N\' Roses',
-    'Red Hot Chili Peppers',
-    'AC/DC'
-  ];
+// Function to remove articles from a string
+function getArticleLessString(input) {
+  let words = input.split(' ');
+  let nonArticleWords = words.filter((word) => {
+    let smallCaseWord = word.toLowerCase();
+    return !(smallCaseWord === 'the' || smallCaseWord === 'an' || smallCaseWord === 'a');
+  });
+  return nonArticleWords.join(' ');
+}
 
-  // Function to remove articles from a string
-  function getArticleLessString(input) {
-    let words = input.split(' ');
-    let nonArticleWords = words.filter((word) => {
-      let smallCaseWord = word.toLowerCase();
-      return !(smallCaseWord === 'the' || smallCaseWord === 'an' || smallCaseWord === 'a');
-    });
-    return nonArticleWords.join(' ');
-  }
+// Array of band names
+let arr = ['Tajmahal', 'Victoria Memorial', 'The Virupaksha Temple'];
 
-  // Function to sort band names without articles
-  function sortBandNames(names) {
-    const sortedNames = names.sort((a, b) => {
-      const trimmedA = getArticleLessString(a).trim().toLowerCase();
-      const trimmedB = getArticleLessString(b).trim().toLowerCase();
-      return trimmedA.localeCompare(trimmedB);
-    });
+// Create a hash map to store article-less strings as keys and original strings as values
+let hashMap = {};
 
-    return sortedNames;
-  }
+for (let i = 0; i < arr.length; i++) {
+  let articleLessString = getArticleLessString(arr[i]);
+  hashMap[articleLessString] = arr[i];
+}
 
-  // Call the sortBandNames function to sort the band names
-  const sortedBandNames = sortBandNames(bandNames);
+// Get article-less strings and sort them
+let articleLessStrings = Object.keys(hashMap);
+articleLessStrings.sort();
 
-  // Get the ul element with id 'bands'
-  const bandsList = document.querySelector('#bands');
+// Create a list of sorted band names without articles
+let outputList = [];
 
-  if (bandsList) {
-    // Clear any existing content inside the ul
-    bandsList.innerHTML = '';
-
-    // Iterate through the sorted band names and add them to the ul as list items
-    sortedBandNames.forEach(band => {
-      const listItem = document.createElement('li');
-      listItem.textContent = getArticleLessString(band);
-      bandsList.appendChild(listItem);
-    });
-  } else {
-    console.error("Element with id 'bands' not found.");
-  }
+articleLessStrings.forEach((newString) => {
+  outputList.push(hashMap[newString]);
 });
+
+// Get the ul element with id 'bands'
+const bandsList = document.querySelector('#bands');
+
+if (bandsList) {
+  // Clear any existing content inside the ul
+  bandsList.innerHTML = '';
+
+  // Iterate through the sorted band names and add them to the ul as list items
+  outputList.forEach(band => {
+    const listItem = document.createElement('li');
+    listItem.textContent = band;
+    bandsList.appendChild(listItem);
+  });
+} else {
+  console.error("Element with id 'bands' not found.");
+}
