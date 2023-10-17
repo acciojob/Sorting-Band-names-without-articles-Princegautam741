@@ -9,14 +9,21 @@ document.addEventListener('DOMContentLoaded', () => {
     'AC/DC'
   ];
 
+  // Function to remove articles from a string
+  function getArticleLessString(input) {
+    let words = input.split(' ');
+    let nonArticleWords = words.filter((word) => {
+      let smallCaseWord = word.toLowerCase();
+      return !(smallCaseWord === 'the' || smallCaseWord === 'an' || smallCaseWord === 'a');
+    });
+    return nonArticleWords.join(' ');
+  }
+
   // Function to sort band names without articles
   function sortBandNames(names) {
-    const articlesRegex = /^(a |an |the )/i;
-
-    // Sort the names without articles
     const sortedNames = names.sort((a, b) => {
-      const trimmedA = a.replace(articlesRegex, '').trim().toLowerCase();
-      const trimmedB = b.replace(articlesRegex, '').trim().toLowerCase();
+      const trimmedA = getArticleLessString(a).trim().toLowerCase();
+      const trimmedB = getArticleLessString(b).trim().toLowerCase();
       return trimmedA.localeCompare(trimmedB);
     });
 
@@ -35,17 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Iterate through the sorted band names and add them to the ul as list items
     sortedBandNames.forEach(band => {
-      // Split the band name into words
-      const words = band.split(' ');
-
-      // Filter out articles ('a', 'an', 'the')
-      const filteredWords = words.filter(word => !['a', 'an', 'the'].includes(word.toLowerCase()));
-
-      // Join the filtered words back into a band name
-      const bandName = filteredWords.join(' ');
-
       const listItem = document.createElement('li');
-      listItem.textContent = bandName;
+      listItem.textContent = getArticleLessString(band);
       bandsList.appendChild(listItem);
     });
   } else {
