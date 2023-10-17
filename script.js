@@ -23,13 +23,6 @@ for (let i = 0; i < arr.length; i++) {
 let articleLessStrings = Object.keys(hashMap);
 articleLessStrings.sort();
 
-// Create a list of sorted band names without articles
-let outputList = [];
-
-articleLessStrings.forEach((newString) => {
-  outputList.push(hashMap[newString]);
-});
-
 // Get the ul element with id 'bands'
 const bandsList = document.querySelector('#bands');
 
@@ -38,9 +31,16 @@ if (bandsList) {
   bandsList.innerHTML = '';
 
   // Iterate through the sorted band names and add them to the ul as list items
-  outputList.forEach(band => {
+  articleLessStrings.forEach(newString => {
+    const band = hashMap[newString];
+
+    // Create a new li element
     const listItem = document.createElement('li');
+
+    // Set the text content of the li element to the band name
     listItem.textContent = band;
+
+    // Append the li element to the ul
     bandsList.appendChild(listItem);
   });
 } else {
